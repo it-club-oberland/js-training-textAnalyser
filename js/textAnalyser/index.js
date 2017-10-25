@@ -19,7 +19,7 @@ Jquery
 */
 
 
-const WIDTH_UNIT = 50; // 50px
+const WIDTH_UNIT = 500; // 500px
 
 function main() {
     let inputs = getInputValues();
@@ -49,11 +49,28 @@ function findOccurences({letters, text}) {
     return result;
 }
 
+function findColor(pPercentage){
+    if(pPercentage < 0.25)
+        return "red";
+    else if(pPercentage >= 0.25 && pPercentage < 0.5)
+        return "orange";
+    else if(pPercentage == 0.5)
+        return "yellow";
+    else if(pPercentage > 0.5 && pPercentage < 0.75)
+        return "lightgreen";
+    else
+        return "darkgreen";
+}
+
 function createBarChart(pMap) {
     let total = 
-        Array.from(x.values()).reduce(function(pAcc, pValue){
+        Array.from(pMap.values()).reduce(function(pAcc, pValue){
             return pAcc + pValue;
         }, 0);
     
-    
+    // render
+    Array.from(pMap.entries()).forEach(function(pEntry){
+        $('section')
+            .append(`<div style="width:${(pEntry[1]/total)*WIDTH_UNIT}px; background-color: ${findColor(pEntry[1]/total)}">${pEntry[0]}</div>`);
+    })
 }
