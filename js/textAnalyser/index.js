@@ -1,6 +1,7 @@
 $("button")
     .on("click", function () {
         // handle the click event
+        main();
     });
 
 
@@ -18,16 +19,41 @@ Jquery
 */
 
 
-function clickHandler() {
+const WIDTH_UNIT = 50; // 50px
 
+function main() {
+    let inputs = getInputValues();
+    let occurencesMap = findOccurences(inputs);
+    createBarChart(occurencesMap);
 }
 
 function getInputValues() {
+    let text = $('textarea').val();
+    let letters = $('input').val();
 
+    return {
+        text,
+        letters: letters.split(",")
+    };
 }
 
-function findOccurences() {
+function findOccurences({letters, text}) {
+    let result = new Map();
 
+    letters.forEach(function (pLetter) {
+        let pattern = new RegExp(pLetter, "g");
+        let count = (text.match(pattern) || []).length;
+        result.set(pLetter, count);
+    });
+
+    return result;
 }
 
-function createBarChart() {}
+function createBarChart(pMap) {
+    let total = 
+        Array.from(x.values()).reduce(function(pAcc, pValue){
+            return pAcc + pValue;
+        }, 0);
+    
+    
+}
