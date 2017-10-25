@@ -21,12 +21,19 @@ Jquery
 
 const WIDTH_UNIT = 500; // 500px
 
+/**
+ * This function is the entry point of the entire application.
+ * It manages all the  successive calls to achieve the desired goal.
+ */
 function main() {
     let inputs = getInputValues();
     let occurencesMap = findOccurences(inputs);
     createBarChart(occurencesMap);
 }
 
+/**
+ * This function is responsbile to get user inputs from the ui.
+ */
 function getInputValues() {
     let text = $('textarea').val();
     let letters = $('input').val();
@@ -37,6 +44,12 @@ function getInputValues() {
     };
 }
 
+/**
+ * This function finds the occunrences of given letters in the text.  
+ *
+ * @param letters, the given letters to search for
+ * @param text, the text which is analysed by the program.
+ */
 function findOccurences({letters, text}) {
     let result = new Map();
 
