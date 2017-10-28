@@ -19,7 +19,7 @@ Jquery
 */
 
 
-const WIDTH_UNIT = 500; // 500px
+const MAX_WIDTH = 450; // 500px
 
 /**
  * This function is the entry point of the entire application.
@@ -77,8 +77,8 @@ function findColor(pPercentage){
 
 function findTotal(pMap){
     let total = 0;
-    for(let entry of pMap){
-        total += entry.value;
+    for(let [key, value] of pMap){
+        total += value;
     }
     return total;
 }
@@ -86,10 +86,16 @@ function findTotal(pMap){
 function createBarChart(pMap) {
     let total = findTotal(pMap);
     
+    $('section').html('');
+    
     // render
-    for(let entry of pMap){
-        let width = entry.value / total;
+    for(let [key, value] of pMap){
+        let percentage = value / total;
+        let color = findColor(percentage);
+        
         $('section')
-            .append(`<div style="width:${(pEntry[1]/total)*WIDTH_UNIT}px; background-color: ${findColor(pEntry[1]/total)}">${pEntry[0]}</div>`);
+            .append(`<div style="
+                            width:${percentage*MAX_WIDTH}px; 
+                            background-color: ${color}">${key}</div>`);
     }
 }
