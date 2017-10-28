@@ -88,6 +88,7 @@ function createBarChart(pMap) {
     
     // render
     for(let entry of pMap){
+        let width = entry.value / total;
         $('section')
             .append(`<div style="width:${(pEntry[1]/total)*WIDTH_UNIT}px; background-color: ${findColor(pEntry[1]/total)}">${pEntry[0]}</div>`);
     }
