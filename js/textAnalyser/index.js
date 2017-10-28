@@ -75,15 +75,20 @@ function findColor(pPercentage){
         return "darkgreen";
 }
 
+function findTotal(pMap){
+    let total = 0;
+    for(let entry of pMap){
+        total += entry.value;
+    }
+    return total;
+}
+
 function createBarChart(pMap) {
-    let total = 
-        Array.from(pMap.values()).reduce(function(pAcc, pValue){
-            return pAcc + pValue;
-        }, 0);
+    let total = findTotal(pMap);
     
     // render
-    Array.from(pMap.entries()).forEach(function(pEntry){
+    for(let entry of pMap){
         $('section')
             .append(`<div style="width:${(pEntry[1]/total)*WIDTH_UNIT}px; background-color: ${findColor(pEntry[1]/total)}">${pEntry[0]}</div>`);
-    })
+    }
 }
